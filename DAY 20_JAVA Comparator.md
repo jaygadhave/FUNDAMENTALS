@@ -1,8 +1,4 @@
 Comparator Interface in Java with Examples
-Difficulty Level : Medium
- Last Updated : 21 Dec, 2021
-Read
-Discuss
 
 A comparator interface is used to order the objects of user-defined classes. A comparator object is capable of comparing two objects of the same class. Following function compare obj1 with obj2.
 
