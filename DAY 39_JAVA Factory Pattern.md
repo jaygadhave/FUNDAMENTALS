@@ -1,94 +1,100 @@
-Factory pattern is one of the most used design patterns in Java. This type of design pattern comes under creational pattern as this pattern provides one of the best ways to create an object.
+It is a creational design pattern that talks about the creation of an object. The factory design pattern says that define an interface ( A java interface or an abstract class) for creating object and let the subclasses decide which class to instantiate. The factory method in the interface lets a class defers the instantiation to one or more concrete subclasses. Since these design patterns talk about the instantiation of an object and so it comes under the category of creational design pattern. If we notice the name Factory method, that means there is a method which is a factory, and in general, factories are involved with creational stuff and here with this, an object is being created. It is one of the best ways to create an object where object creation logic is hidden from the client. Now Let’s look at the implementation.
 
-In Factory pattern, we create object without exposing the creation logic to the client and refer to newly created object using a common interface.
+Implementation: 
 
-Implementation
-We're going to create a Shape interface and concrete classes implementing the Shape interface. A factory class ShapeFactory is defined as a next step.
+Define a factory method inside an interface. 
+Let the subclass implements the above factory method and decides which object to create. 
+In Java, constructors are not polymorphic, but by allowing subclass to create an object, we are adding polymorphic behavior to the instantiation. In short, we are trying to achieve Pseudo polymorphism by letting the subclass to decide what to create, and so this Factory method is also called a virtual constructor. 
+Let us try to implement it with a real-time problem and some coding exercises. 
 
-FactoryPatternDemo, our demo class will use ShapeFactory to get a Shape object. It will pass information (CIRCLE / RECTANGLE / SQUARE) to ShapeFactory to get the type of object it needs.
+Problem Statement: Consider we want to implement a notification service through email, SMS, and push notifications. Let’s try to implement this with the help of the factory method design pattern. First, we will design a UML class diagram for this. 
 
 
-Step 1
-Create an interface.
 
-Shape.java
-public interface Shape {
-   void draw();
+In the above class diagram, we have an interface called Notification, and three concrete classes are implementing the Notification interface. A factory class NotificationFactory is created to get a Notification object. Let’s jump into the coding now. 
+
+Create Notification interface 
+
+
+public interface Notification {
+    void notifyUser();
 }
+Note- Above interface could be created as an abstract class as well. 
+Create all implementation classes 
 
-Step 2
-Create concrete classes implementing the same interface.
-Rectangle.java
-public class Rectangle implements Shape {
-   @Override
-   public void draw() {
-      System.out.println("Inside Rectangle::draw() method.");
-   }
+SMSNotification.java
+
+public class SMSNotification implements Notification {
+ 
+    @Override
+    public void notifyUser()
+    {
+        // TODO Auto-generated method stub
+        System.out.println("Sending an SMS notification");
+    }
 }
-Square.java
-public class Square implements Shape {
-   @Override
-   public void draw() {
-      System.out.println("Inside Square::draw() method.");
-   }
+EmailNotification.java
+
+public class EmailNotification implements Notification {
+ 
+    @Override
+    public void notifyUser()
+    {
+        // TODO Auto-generated method stub
+        System.out.println("Sending an e-mail notification");
+    }
 }
-Circle.java
-public class Circle implements Shape {
-   @Override
-   public void draw() {
-      System.out.println("Inside Circle::draw() method.");
-      }
-      }
+PushNotification.java
 
-Step 3
-Create a Factory to generate object of concrete class based on given information.
-
-ShapeFactory.java
-
-public class ShapeFactory {	
-   //use getShape method to get object of type shape 
-   public Shape getShape(String shapeType){
-      if(shapeType == null){
-         return null;
-      }		
-      if(shapeType.equalsIgnoreCase("CIRCLE")){
-      return new Circle();         
-	 } else if(shapeType.equalsIgnoreCase("RECTANGLE")){
-         return new Rectangle();         
-      } else if(shapeType.equalsIgnoreCase("SQUARE")){
-         return new Square();
-      }      
-      return null;
-      }
-      }
-      
-Step 4
-Use the Factory to get object of concrete class by passing an information such as type.
-
-FactoryPatternDemo.java
-
-public class FactoryPatternDemo {
-
-   public static void main(String[] args) {
-      ShapeFactory shapeFactory = new ShapeFactory();
-      //get an object of Circle and call its draw method.
-      Shape shape1 = shapeFactory.getShape("CIRCLE");
-      //call draw method of Circle
-      shape1.draw();
-      //get an object of Rectangle and call its draw method.
-      Shape shape2 = shapeFactory.getShape("RECTANGLE");
-      //call draw method of Rectangle
-      shape2.draw();
-      //get an object of Square and call its draw method.
-      Shape shape3 = shapeFactory.getShape("SQUARE");
-      //call draw method of square
-      shape3.draw();
-   }
+public class PushNotification implements Notification {
+ 
+    @Override
+    public void notifyUser()
+    {
+        // TODO Auto-generated method stub
+        System.out.println("Sending a push notification");
+    }
 }
+Create a factory class NotificationFactory.java to instantiate concrete class. 
 
-Step 5
-Verify the output.
 
-Inside Circle::draw() method.
-Inside Rectangle::draw() method.
-Inside Square::draw() method.
+public class NotificationFactory {
+    public Notification createNotification(String channel)
+    {
+        if (channel == null || channel.isEmpty())
+            return null;
+        switch (channel) {
+        case "SMS":
+            return new SMSNotification();
+        case "EMAIL":
+            return new EmailNotification();
+        case "PUSH":
+            return new PushNotification();
+        default:
+            throw new IllegalArgumentException("Unknown channel "+channel);
+        }
+    }
+}
+Now let’s use factory class to create and get an object of concrete class by passing some information. 
+
+
+public class NotificationService {
+    public static void main(String[] args)
+    {
+        NotificationFactory notificationFactory = new NotificationFactory();
+        Notification notification = notificationFactory.createNotification("SMS");
+        notification.notifyUser();
+    }
+}
+Output : Sending an SMS notification
+
+
+Real-time examples:
+
+This design pattern has been widely used in JDK, such as 
+
+1. getInstance() method of java.util.Calendar, NumberFormat, and ResourceBundle uses factory method design pattern. 
+2. All the wrapper classes like Integer, Boolean etc, in Java uses this pattern to evaluate the values using valueOf() method. 
+3. java.nio.charset.Charset.forName(), java.sql.DriverManager#getConnection(), java.net.URL.openConnection(), java.lang.Class.newInstance(), java.lang.Class.forName() are some of their example where factory method design pattern has been used.
+
+Conclusion: So far we learned what is Factory method design pattern and how to implement it. I believe now we have a fair understanding of the advantage of this design mechanism.
