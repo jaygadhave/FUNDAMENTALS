@@ -25,7 +25,6 @@ Create all implementation classes
 SMSNotification.java
 
 public class SMSNotification implements Notification {
- 
     @Override
     public void notifyUser()
     {
@@ -36,7 +35,6 @@ public class SMSNotification implements Notification {
 EmailNotification.java
 
 public class EmailNotification implements Notification {
- 
     @Override
     public void notifyUser()
     {
@@ -46,8 +44,7 @@ public class EmailNotification implements Notification {
 }
 PushNotification.java
 
-public class PushNotification implements Notification {
- 
+public class PushNotification implements Notification { 
     @Override
     public void notifyUser()
     {
