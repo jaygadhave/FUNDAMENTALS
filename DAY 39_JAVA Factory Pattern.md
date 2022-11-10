@@ -55,8 +55,7 @@ PushNotification.java
         System.out.println("Sending a push notification");
     }
     }
-Create a factory class NotificationFactory.java to instantiate concrete class. 
-
+Create a factory class NotificationFactory.java to instantiate concrete class.
 
 public class NotificationFactory {
     public Notification createNotification(String channel)
@@ -76,7 +75,6 @@ public class NotificationFactory {
     }
 }
 Now let’s use factory class to create and get an object of concrete class by passing some information. 
-
 
 public class NotificationService {
     public static void main(String[] args)
@@ -98,3 +96,4 @@ This design pattern has been widely used in JDK, such as
 3. java.nio.charset.Charset.forName(), java.sql.DriverManager#getConnection(), java.net.URL.openConnection(), java.lang.Class.newInstance(), java.lang.Class.forName() are some of their example where factory method design pattern has been used.
 
 Conclusion: So far we learned what is Factory method design pattern and how to implement it. I believe now we have a fair understanding of the advantage of this design mechanism.
+
