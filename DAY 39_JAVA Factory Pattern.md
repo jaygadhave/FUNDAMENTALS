@@ -24,34 +24,37 @@ Create all implementation classes
 
 SMSNotification.java
 
-public class SMSNotification implements Notification {
     @Override
+    public class SMSNotification implements Notification {
+
     public void notifyUser()
     {
         // TODO Auto-generated method stub
         System.out.println("Sending an SMS notification");
     }
-}
+    }
+    
 EmailNotification.java
-
-public class EmailNotification implements Notification {
+ 
     @Override
+    public class EmailNotification implements Notification {
     public void notifyUser()
     {
         // TODO Auto-generated method stub
         System.out.println("Sending an e-mail notification");
     }
-}
+    }
+    
 PushNotification.java
-
-public class PushNotification implements Notification { 
+ 
     @Override
+    public class PushNotification implements Notification {
     public void notifyUser()
     {
         // TODO Auto-generated method stub
         System.out.println("Sending a push notification");
     }
-}
+    }
 Create a factory class NotificationFactory.java to instantiate concrete class. 
 
 
